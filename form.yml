@@ -1,9 +1,9 @@
 ---
-cluster: "hawk"
 
 form:
   - rs_version
   - ha_modules
+  - cluster
   - ha_partition
   - ha_cpus
   - ha_gpus
@@ -32,6 +32,12 @@ attributes:
   ha_modules:
     label: "Additional modules (optional)"
     help: "<small>Space separated list of additional modules to load</small>"
+
+  cluster:
+    widget: "select"
+    options:
+      - ["Standard", "hawk"]
+      - ["AMD cluster", "hawkloginamd"]
 
   ha_partition:
     label: "Partition"
