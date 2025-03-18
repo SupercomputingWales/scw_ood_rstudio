@@ -1,5 +1,5 @@
-Bootstrap:docker  
-From:rocker/tidyverse:4.2.3
+Bootstrap:docker
+From:rocker/tidyverse:4.4.0
 
 %labels
 MAINTAINER Thomas Green
