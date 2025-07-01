@@ -27,3 +27,6 @@ apt-get install -y libxt-dev
 apt-get install -y libgsl-dev
 # For R package htslib
 apt-get install -y libbz2-dev
+
+# For ImageMagick
+apt-get install -y imagemagick libmagick++-dev
