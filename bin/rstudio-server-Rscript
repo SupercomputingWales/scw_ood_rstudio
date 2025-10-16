@@ -1,0 +1,14 @@
+#!/bin/bash
+MYRSTUDIO_LIB=$HOME/R-Rstudio
+if [ ! -d $MYRSTUDIO_LIB ]
+then
+  echo "INFO: Creating $MYRSTUDIO_LIB to use as ~/R"
+  mkdir $MYRSTUDIO_LIB
+fi
+
+MYRSTUDIO_LIB=$(readlink -f $MYRSTUDIO_LIB)
+MYR_LIB=$(readlink -f $HOME/R)
+
+export APPTAINER_BIND=$MYRSTUDIO_LIB:$MYR_LIB
+
+exec apptainer exec --nv $RSTUDIO_IMAGE Rscript "$@"

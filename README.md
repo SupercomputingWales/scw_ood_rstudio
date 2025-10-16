@@ -3,39 +3,20 @@
 ![GitHub Release](https://img.shields.io/github/release/osc/bc_osc_rstudio_server.svg)
 [![GitHub License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-An interactive app designed for OSC OnDemand that launches an RStudio Server
-within an Owens batch job.
+An interactive app designed for ARCCA OnDemand that launches an RStudio Server
+within a Falcon SLURM job.
 
 ## Prerequisites
 
-This Batch Connect app requires the following software be installed on the
-**compute nodes** that the batch job is intended to run on (**NOT** the
+This Batch Connect app requires has been tested with following softwareinstalled on
+the **compute nodes** that the batch job is intended to run on (**NOT** the
 OnDemand node):
 
-- [Lmod] 6.0.1+ or any other `module restore` and `module load <modules>` based
+- [Lmod] 8.7.59 2025-03-06 or some other `module restore` and `module load <modules>` based
   CLI used to load appropriate environments within the batch job before
   launching the RStudio Server.
-
-**without Singularity**
-
-- [R] 3.3.2+ (earlier versions are untested but may work for you)
-- [RStudio Server] 1.0.136+ (earlier versions are untested by may work for you)
-- [PRoot] 5.1.0+ (used to setup fake bind mount)
-
-**or with Singularity**
-
-- [Singularity] 2.4.2+
-- A Singularity image similar to [nickjer/singularity-rstudio]
-- Corresponding module to launch the above Singularity image (see
-  [example_module])
-
-[R]: https://www.r-project.org/
-[RStudio Server]: https://www.rstudio.com/products/rstudio-server/
-[PRoot]: https://proot-me.github.io/
-[Singularity]: http://singularity.lbl.gov/
-[Lmod]: https://www.tacc.utexas.edu/research-development/tacc-projects/lmod
-[nickjer/singularity-rstudio]: https://www.singularity-hub.org/collections/463
-[example_module]: https://github.com/nickjer/singularity-rstudio/blob/master/example_module/
+- [Apptainer] 1.4.2-1.el9+
+- A Docker image similar to [rocker/tidyverse]
 
 ## Install
 
@@ -43,32 +24,26 @@ Use git to clone this app and checkout the desired branch/version you want to
 use:
 
 ```sh
-scl enable git19 -- git clone <repo>
+git clone <repo>
 cd <dir>
-scl enable git19 -- git checkout <tag/branch>
+git checkout <tag/branch>
 ```
 
-You will not need to do anything beyond this as all necessary assets are
-installed. You will also not need to restart this app as it isn't a Passenger
-app.
+When updating RStudio version, modify the following files:
 
-To update the app you would:
+ - `rstudio-<version>.def`, also edit if additional packages are needed (update file name accordingly).
+ - `form.yml`, add new version under `rs_version` field.
+ - Create a new modulefile in `modulefile/ood-rstudio-server/` and copy it (as root) to `/trinity/shared/modulefiles/`. 
 
+Build the image (this works on Falcon as a user in the admin group).
 ```sh
-cd <dir>
-scl enable git19 -- git fetch
-scl enable git19 -- git checkout <tag/branch>
+apptainer build rstudio-<version>.sif rstudio-<version>.def
 ```
 
-Again, you do not need to restart the app as it isn't a Passenger app.
+Create a new directory (as root) in `/shared/apps/containers/apptainer/languages/rstudio-server/<version>` and copy the
+new image and the `bin/` directory (which contains a set of wrappers for R, RScript and RStudio Server).
 
-## Contributing
-
-1. Fork it ( https://github.com/OSC/bc_osc_rstudio_server/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+Test your changes following [OnDemand App Development] procedures.
 
 ## License
 
@@ -76,3 +51,11 @@ Again, you do not need to restart the app as it isn't a Passenger app.
   [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/)
 * Code is licensed under MIT (see LICENSE.txt)o
 * RStudio, Shiny and the RStudio logo are all registered trademarks of RStudio.
+
+[R]: https://www.r-project.org/
+[RStudio Server]: https://posit.co/download/rstudio-server/
+[PRoot]: https://proot-me.github.io/
+[Apptainer]: https://apptainer.org/documentation/
+[Lmod]: https://lmod.readthedocs.io/en/latest/
+[rocker/tidyverse]: https://hub.docker.com/r/rocker/tidyverse/
+[OnDemand App Development]: https://osc.github.io/ood-documentation/latest/how-tos/app-development.html

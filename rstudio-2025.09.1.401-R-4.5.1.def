@@ -1,8 +1,8 @@
 Bootstrap:docker
-From:rocker/tidyverse:4.4.0
+From:rocker/tidyverse:4.5.1
 
 %labels
-MAINTAINER Thomas Green
+MAINTAINER Jose Munoz
 
 %environment
 

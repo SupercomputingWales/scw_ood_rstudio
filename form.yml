@@ -1,9 +1,9 @@
 ---
+cluster: "TrinityX"
 
 form:
   - rs_version
   - ha_modules
-  - cluster
   - ha_partition
   - ha_cpus
   - ha_gpus
@@ -21,25 +21,12 @@ attributes:
     help: "<small>Supported version of RStudio available."
     widget: select
     options:
-      - [ "2024.04.0.735-base (R 4.4)", "2024.04.0.735-base" ]
-      - [ "2023.12.0.369-base", "2023.12.0.369-base" ]
-      - [ "2023.03.0.386", "2023.03.0.386" ]
-      - [ "2022.02.3.492", "2022.02.3.492" ]
-      - [ "2021.09.2.382", "2021.09.2.382" ]
-      - [ "1.4.1717.dev", "1.4.1717.dev" ]
-      - [ "1.4.1717", "1.4.1717" ]
-      - [ "1.3.1093", "1.3.1093" ]
-    value: "2023.03.0.386"
+      - [ "2025.09.1.401 (R 4.5.1)", "2025.09.1.401"]
+    value: "2025.09.1.401 (R 4.5.1)"
 
   ha_modules:
     label: "Additional modules (optional)"
     help: "<small>Space separated list of additional modules to load</small>"
-
-  cluster:
-    widget: "select"
-    options:
-      - ["Standard", "hawk"]
-      - ["AMD cluster", "hawkloginamd"]
 
   ha_partition:
     label: "Partition"

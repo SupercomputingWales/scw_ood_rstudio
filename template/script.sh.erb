@@ -11,7 +11,7 @@ cd "${HOME}"
 #
 <%- unless context.rs_version.blank? -%>
 # Load rstudio module
-module load rstudio-server/<%= context.rs_version %>
+module load ood-rstudio-server/<%= context.rs_version %>
 <%- end -%>
 
 module list
