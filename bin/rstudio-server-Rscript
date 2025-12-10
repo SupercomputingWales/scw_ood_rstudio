@@ -9,6 +9,6 @@ fi
 MYRSTUDIO_LIB=$(readlink -f $MYRSTUDIO_LIB)
 MYR_LIB=$(readlink -f $HOME/R)
 
-export APPTAINER_BIND=$MYRSTUDIO_LIB:$MYR_LIB
+export APPTAINER_BIND=$MYRSTUDIO_LIB:$MYR_LIB,/shared/scratch/$USER
 
 exec apptainer exec --nv $RSTUDIO_IMAGE Rscript "$@"

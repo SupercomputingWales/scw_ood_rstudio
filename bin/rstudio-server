@@ -50,7 +50,7 @@ fi
 MYRSTUDIO_LIB=$(readlink -f $MYRSTUDIO_LIB)
 MYR_LIB=$(readlink -f $HOME/R)
 
-export APPTAINER_BIND=$RSTUDIO_DB:/var/lib/rstudio-server,$MYRSTUDIO_LIB:$MYR_LIB,/sys/fs/cgroup
+export APPTAINER_BIND=$RSTUDIO_DB:/var/lib/rstudio-server,$MYRSTUDIO_LIB:$MYR_LIB,/sys/fs/cgroup,/shared/scratch/$USER
 
 # Check if we use job specific Renviron.
 if [ -n "${MYRENVIRON:-}" ]
