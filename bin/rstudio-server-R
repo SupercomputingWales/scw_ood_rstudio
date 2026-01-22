@@ -9,6 +9,15 @@ fi
 MYRSTUDIO_LIB=$(readlink -f $MYRSTUDIO_LIB)
 MYR_LIB=$(readlink -f $HOME/R)
 
-export APPTAINER_BIND=$MYRSTUDIO_LIB:$MYR_LIB,/shared/scratch/$USER
+# get user project scratch directories and mount them into RStudio container
+set +u
+for project in `/usr/bin/id $USER | /usr/bin/grep -o 'SCWF[0-9]*'`; do
+    echo $project
+    project_dirs=/scratch/$project,$project_dirs
+done
+project_dirs=`echo $project_dirs | sed 's/,$//'`
+set -u
+
+export APPTAINER_BIND=$MYRSTUDIO_LIB:$MYR_LIB,$project_dirs
 
 exec apptainer exec --nv $RSTUDIO_IMAGE R "$@"

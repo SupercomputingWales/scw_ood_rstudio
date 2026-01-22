@@ -52,14 +52,13 @@ MYR_LIB=$(readlink -f $HOME/R)
 
 # get user project scratch directories and mount them into RStudio container
 set +u
-for project in `myprojects | grep SCWF`; do
+for project in `/usr/bin/id $USER | /usr/bin/grep -o 'SCWF[0-9]*'`; do
     echo $project
     project_dirs=/scratch/$project,$project_dirs
 done
 project_dirs=`echo $project_dirs | sed 's/,$//'`
 set -u
 
-#export APPTAINER_BIND=$RSTUDIO_DB:/var/lib/rstudio-server,$MYRSTUDIO_LIB:$MYR_LIB,/sys/fs/cgroup,/shared/scratch/$USER
 export APPTAINER_BIND=$RSTUDIO_DB:/var/lib/rstudio-server,$MYRSTUDIO_LIB:$MYR_LIB,/sys/fs/cgroup,$project_dirs
 
 # Check if we use job specific Renviron.
