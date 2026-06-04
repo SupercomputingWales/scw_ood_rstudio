@@ -42,7 +42,7 @@ script:
             <%- if not ha_mem.blank? -%>
                 "--mem=<%= ha_mem.to_i %>G"
             <%- end -%>
-            <%- if not ha_qos.strip -%>
+            <%- if not ha_qos.blank? -%>
                 "--qos=<%= ha_qos.strip %>"
             <%- end -%>
           ]
