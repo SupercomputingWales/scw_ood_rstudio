@@ -37,8 +37,8 @@ end
 local app         = "rstudio-server"
 local appcategory = "languages"
 local version     = "2026.04.0.526"
-local base        = "/shared/home1/c.c1045890/ondemand/dev/scw_ood_rstudio"
---local app_path    = pathJoin(base, appcategory, app, version, "bin")
+--local base        = "/shared/home1/c.c1045890/ondemand/dev/scw_ood_rstudio"
+local app_path    = pathJoin(base, appcategory, app, version, "bin")
 local app_path    = pathJoin(base, "bin")
 
 -- Function to check if a file exists
