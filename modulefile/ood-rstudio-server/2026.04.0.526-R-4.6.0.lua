@@ -67,5 +67,5 @@ end
 
 -- application specific settings
 --setenv("RSTUDIO_IMAGE", pathJoin(base,"rstudio-2026.04.0.526-R-4.6.0.sif"))
-setenv("RSTUDIO_IMAGE", pathJoin(base, appcategory, app, version,"rstudio-20256.04.0.526-R-4.6.0.sif"))
+setenv("RSTUDIO_IMAGE", pathJoin(base, appcategory, app, version,"rstudio-2026.04.0.526-R-4.6.0.sif"))
 prepend_path("PATH",app_path)
