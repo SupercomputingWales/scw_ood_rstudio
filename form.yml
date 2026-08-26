@@ -3,7 +3,6 @@ cluster: "TrinityX"
 
 form:
   - rs_version
-  - ha_modules
   - auto_queues
   - ha_cpus
   - ha_gpus
@@ -12,6 +11,7 @@ form:
   - auto_qos
   - auto_accounts
   - bc_num_hours
+  - ha_modules
   - email
   - bc_email_on_started
 
