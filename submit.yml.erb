@@ -42,13 +42,14 @@ script:
             <%- if not ha_mem.blank? -%>
                 "--mem=<%= ha_mem.to_i %>G",
             <%- end -%>
-            <%- if not ha_qos.blank? -%>
-                "--qos=<%= ha_qos.strip %>",
+            <%- if not auto_qos.blank? -%>
+                "--qos=<%= auto_qos.strip %>",
             <%- end -%>
           ]
-  queue_name: <%= ha_partition.blank? ? "dev" : ha_partition.strip %>
+  queue_name: <%= auto_queues.blank? ? "dev" : auto_queues.strip %>
   reservation_id: <%= ha_reservation.blank? ? "" : ha_reservation.strip %>
   <% unless email.blank? %>
   email: <%= email %>
   <% end %>
+
 
