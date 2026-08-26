@@ -4,13 +4,13 @@ cluster: "TrinityX"
 form:
   - rs_version
   - ha_modules
-  - ha_partition
+  - auto_queues
   - ha_cpus
   - ha_gpus
   - ha_mem
   - ha_reservation
-  - ha_qos
-  - bc_account
+  - auto_qos
+  - auto_accounts
   - bc_num_hours
   - email
   - bc_email_on_started
@@ -30,12 +30,10 @@ attributes:
     label: "Additional modules (optional)"
     help: "<small>Space separated list of additional modules to load</small>"
 
-  ha_partition:
-    label: "Partition"
+  auto_queues:
     value: "dev"
-    required: true
-    help: "<small>Partition to submit the job to</small>"
-    widget: text_field
+    help: "<small>Partition to submit the job to. See partition descriptions and limits 
+           at https://wiki.arcca.cf.ac.uk/index.php/Partitions_on_Falcon</small>"
 
   ha_cpus:
     label: "#CPUs"
@@ -62,11 +60,11 @@ attributes:
     label: "Reservation (optional)"
     help: "<small>For special occassions a reservation may be given</small>" 
   
-  ha_qos:
+  auto_qos:
     label: "QOS (optional)"
     help: "<small>For special job limits a QOS may be given</small>"
 
-  bc_account:
+  auto_accounts:
     label: "Project code"
  
   bc_num_hours:
