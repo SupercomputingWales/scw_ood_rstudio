@@ -11,14 +11,15 @@ cd "${HOME}"
 #
 <%- unless context.rs_version.blank? -%>
 # Load rstudio module
+module use /shared/home1/c.c1045890/ondemand/dev/scw_ood_rstudio/modulefile
 module load ood-rstudio-server/<%= context.rs_version %>
 <%- end -%>
 
 module list
 
-<%- unless context.ha_modules.blank? -%>
+<%- unless context.modules.blank? -%>
 # Load additional modules
-module load <%= context.ha_modules %>
+module load <%= context.modules %>
 <%- end -%>
 
 # Benchmark info

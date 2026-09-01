@@ -1,4 +1,5 @@
 ---
+title: "RStudio Server"
 cluster: "TrinityX"
 
 form:
@@ -11,7 +12,8 @@ form:
   - auto_qos
   - auto_accounts
   - bc_num_hours
-  - ha_modules
+  - modules
+  - slurm_extra_args
   - email
   - bc_email_on_started
 
@@ -26,17 +28,13 @@ attributes:
       - [ "2024.04.0.735 (R 4.4.0)", "2024.04.0.735"]
     value: "2025.09.1.401 (R 4.5.1)"
 
-  ha_modules:
-    label: "Additional modules (optional)"
-    help: "<small>Space separated list of additional modules to load</small>"
-
   auto_queues:
     value: "dev"
     help: "<small>Partition to submit the job to. See partition descriptions and limits 
            at https://wiki.arcca.cf.ac.uk/index.php/Partitions_on_Falcon</small>"
 
   ha_cpus:
-    label: "#CPUs"
+    label: "Number of Cores for the job"
     widget: "number_field"
     help: "<small>Number of CPU cores to allocate</small>"
     required: true
@@ -44,7 +42,7 @@ attributes:
     value: "1"
 
   ha_gpus:
-    label: "#GPUs (optional)"
+    label: "Number of GPUs for the job (optional)"
     widget: "number_field"
     help: "<small>Number of GPUs to allocate (don't forget to select a partition with GPUs)</small>"
     min: 1
@@ -52,10 +50,14 @@ attributes:
     value: ""
 
   ha_mem:
-    label: "Memory (GB) (optional)"
+    label: "Memory (in GB) for the job (optional)"
     widget: "number_field"
     help: "<small>Amount of memory to allocate</small>"
   
+  slurm_extra_args:
+    label: "Extra SLURM arguments"
+    help: "Additional arguments to pass to the SLURM job script"
+
   ha_reservation:
     label: "Reservation (optional)"
     help: "<small>For special occassions a reservation may be given</small>" 
@@ -73,4 +75,8 @@ attributes:
   email:
     label: "Email address"
     help: "<small>Address used to send start of job notification</small>"
+
+  modules:
+    label: "Additional modules (optional)"
+    help: "<small>Space separated list of additional modules to load</small>"
 

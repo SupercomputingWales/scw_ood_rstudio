@@ -10,3 +10,9 @@ description: |
   [R]: https://www.r-project.org/
   [Owens]: https://www.osc.edu/resources/technical_support/supercomputers/owens
   [Pitzer]: https://www.osc.edu/resources/technical_support/supercomputers/pitzer
+
+tile:
+  title: "RStudio Server"
+  sub_caption: |
+    RStudio Server job
+
